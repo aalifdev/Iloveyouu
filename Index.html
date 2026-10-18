@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100d15">
+<title>Forever Us — A Love Experience</title>
+
+<style>
+:root{
+  --bg:#100d15;
+  --panel:#1a1521;
+  --panel2:#211a2a;
+  --text:#fff4fa;
+  --muted:#b9a8bf;
+  --pink:#ff91bd;
+  --purple:#ba9cff;
+  --line:#ffffff16;
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  margin:0;background:
+  radial-gradient(ellipse at 0% 5%,#51233e55,transparent 35%),
+  radial-gradient(ellipse at 100% 40%,#34235444,transparent 40%),
+  var(--bg);
+  color:var(--text);font-family:system-ui,-apple-system,sans-serif;
+  overflow-x:hidden;line-height:1.65;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--pink);outline-offset:3px
+}
+button:disabled{opacity:.5;cursor:not-allowed}
+a{color:inherit}
+::selection{background:#ff91bd55}
+#ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+main,.nav{position:relative;z-index:1}
+.nav{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px max(16px,calc((100% - 900px)/2));
+  background:#100d15dc;backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)
+}
+.brand{font-size:12px;letter-spacing:2px;font-weight:800}
+.brand span{color:var(--pink)}
+.nav-actions{display:flex;gap:8px}
+.icon-btn,.secondary,.primary,.danger{
+  border:1px solid var(--line);border-radius:13px;
+  padding:10px 14px;background:#ffffff08;
+  transition:transform .2s,background .2s,border-color .2s;
+}
+.icon-btn:hover,.secondary:hover{background:#ffffff14}
+.primary{
+  background:linear-gradient(115deg,#ffb1d0,#c3a9ff);
+  color:#211321;border:0;font-weight:750;
+  box-shadow:0 6px 24px #ff91bd19
+}
+.primary:hover{transform:translateY(-2px)}
+.danger{border-color:#ff91bd45;color:#ffb1ce}
+main{max-width:900px;width:calc(100% - 30px);margin:auto}
+section{padding:55px 0;scroll-margin-top:70px}
+.hero{text-align:center;padding:65px 0 42px}
+.eyebrow{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--pink);font-weight:750
+}
+h1,h2,h3,p{margin-top:0}
+h1{
+  font-size:clamp(42px,9vw,78px);line-height:1.08;
+  letter-spacing:-3px;margin:20px 0;font-weight:800
+}
+h1 .gradient,.gradient{
+  background:linear-gradient(110deg,#fff0f7,#ff91bd 45%,#c0a2ff);
+  color:transparent;background-clip:text;-webkit-background-clip:text
+}
+h2{font-size:clamp(26px,5vw,38px);line-height:1.2;letter-spacing:-1px}
+h3{font-size:17px;margin-bottom:8px}
+p{color:var(--muted)}
+.hero-copy{max-width:520px;margin:0 auto 24px;font-size:14px}
+.hero-heart{
+  width:108px;height:108px;margin:auto;border-radius:50%;
+  display:grid;place-items:center;font-size:45px;
+  background:radial-gradient(circle,#ff91bd30,transparent 70%);
+  border:1px solid #ff91bd45;
+  box-shadow:0 0 55px #ff91bd14;
+  animation:heartbeat 3s ease-in-out infinite
+}
+@keyframes heartbeat{50%{transform:scale(1.045);box-shadow:0 0 65px #ff91bd2b}}
+.hero-buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mini{font-size:11px;color:#9c8ca6;margin-top:20px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{
+  min-width:0;padding:21px;border:1px solid var(--line);
+  background:linear-gradient(145deg,#ffffff0c,#ffffff03);
+  border-radius:var(--radius);box-shadow:0 15px 40px #00000014;
+  backdrop-filter:blur(10px)
+}
+.card p:last-child{margin-bottom:0}
+.wide{grid-column:1/-1}
+.section-head{margin-bottom:24px}
+.section-head p{font-size:13px;margin-bottom:0}
+.label{display:block;color:#cbb6d6;font-size:12px;margin-bottom:7px}
+.field{
+  display:block;width:100%;min-width:0;background:#100d15;
+  color:var(--text);border:1px solid #ffffff22;
+  padding:12px;border-radius:12px;margin-bottom:12px
+}
+textarea.field{resize:vertical;min-height:95px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row>*{min-width:0}
+.row .field{flex:1}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.actions button{font-size:12px}
+.big-number{font-size:30px;font-weight:800;letter-spacing:-1px}
+.small{font-size:12px}
+.muted{color:var(--muted)}
+.divider{height:1px;background:var(--line);margin:18px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{
+  text-align:center;padding:13px 5px;border:1px solid var(--line);
+  background:#ffffff05;border-radius:15px
+}
+.stat strong{display:block;font-size:24px}
+.stat span{font-size:10px;color:var(--muted)}
+.pill{
+  display:inline-block;padding:5px 10px;border-radius:30px;
+  background:#ff91bd12;color:#ffb9d4;border:1px solid #ff91bd28;
+  font-size:10px;letter-spacing:1px
+}
+.quote{
+  font-family:Georgia,serif;font-size:24px;line-height:1.5;
+  font-style:italic;color:#fce6f2
+}
+.progress{height:6px;background:#ffffff12;border-radius:9px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--purple));transition:width .5s}
+.meter{height:8px;background:#ffffff12;border-radius:10px;overflow:hidden;margin:8px 0 14px}
+.meter span{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--purple))}
+.letter{
+  white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.9;
+  color:#f8dce9;font-family:Georgia,serif
+}
+.memory{display:flex;flex-direction:column;gap:8px}
+.memory-item{
+  display:flex;gap:12px;padding:13px;border:1px solid var(--line);
+  border-radius:15px;background:#ffffff05
+}
+.memory-icon{font-size:23px}
+.memory-item p{font-size:12px;margin:3px 0 0;overflow-wrap:anywhere}
+.memory-item strong{font-size:13px}
+.memory-item button{margin-left:auto;align-self:start}
+.heart-float{
+  position:fixed;pointer-events:none;z-index:50;
+  animation:fly 2.5s ease-out forwards;
+}
+@keyframes fly{
+  from{transform:translateY(0) scale(.6) rotate(0);opacity:1}
+  to{transform:translateY(-230px) scale(1.5) rotate(35deg);opacity:0}
+}
+.reveal{opacity:1;transform:none}
+.js-ready .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
+footer{text-align:center;padding:35px 0 45px;border-top:1px solid var(--line)}
+footer p{font-size:11px}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);
+  background:#2b2035;border:1px solid #ffffff25;border-radius:14px;
+  padding:12px 18px;font-size:12px;z-index:100;
+  opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.modal{
+  position:fixed;inset:0;z-index:80;background:#08060bdc;
+  display:none;place-items:center;padding:20px
+}
+.modal.open{display:grid}
+.modal-box{
+  width:min(100%,420px);max-height:85vh;overflow:auto;
+  padding:25px;background:#1a1521;border:1px solid #ffffff25;
+  border-radius:24px;box-shadow:0 30px 100px #0008
+}
+.modal-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+#musicStatus{font-size:12px;color:var(--muted)}
+body.light{
+  --bg:#f9edf4;--panel:#fff7fc;--panel2:#f2e6f4;
+  --text:#34233a;--muted:#79687f;--line:#5c36551c
+}
+body.light{background:radial-gradient(ellipse at 0 0,#ffc9df,transparent 40%),var(--bg)}
+body.light .nav{background:#f9edf4e8}
+body.light .card{background:#ffffff99}
+body.light .field{background:#fff8fd;color:#34233a}
+body.light .secondary,body.light .icon-btn{background:#ffffff70;color:#34233a}
+body.light .quote{color:#6b3b65}
+body.light .letter{color:#65435f}
+body.light .modal-box{background:#fff5fc}
+body.light .toast{background:#fff5fc;color:#34233a}
+body.low-motion *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@media(min-width:650px){
+  .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hero{padding-top:75px}
+}
+@media(max-width:480px){
+  main{width:calc(100% - 24px)}
+  section{padding:38px 0}
+  .hero{padding-top:48px}
+  .grid{gap:10px}
+  .card{padding:16px;border-radius:18px}
+  .nav{padding:10px 12px}
+  .brand{font-size:10px;letter-spacing:1px}
+  .icon-btn{padding:9px 10px}
+  h1{letter-spacing:-2px}
+  .stat strong{font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+
+<body>
+<div id="ambient" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="brand">FOREVER <span>♡</span> US</div>
+  <div class="nav-actions">
+    <button class="icon-btn" id="themeBtn" aria-label="Switch theme">◐ Theme</button>
+    <button class="icon-btn" id="musicBtn" aria-label="Toggle music">♫ Music</button>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-heart">♥</div>
+  <div class="eyebrow" style="margin-top:28px">A little corner of our universe</div>
+  <h1><span id="heroName1">You</span> &<br><span class="gradient" id="heroName2">Me</span></h1>
+  <p class="hero-copy" id="heroSubtitle">
+    In a world full of temporary things, you are my favorite forever.
+  </p>
+  <div class="hero-buttons">
+    <button class="primary" id="heroSurprise">Open your surprise ♡</button>
+    <button class="secondary" id="heroEdit">Personalize our page</button>
+  </div>
+  <div class="mini">MADE WITH LOVE · JUST FOR US</div>
+</section>
+
+<section id="our-story" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">01 / OUR LITTLE WORLD</div>
+    <h2>Every love story is special.</h2>
+    <p>But ours has a place that belongs only to us.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="pill">YOUR PERSON</div>
+      <h3 id="nameCard1" style="margin-top:14px">My Favorite Human</h3>
+      <p class="small">The one who makes ordinary moments feel extraordinary.</p>
+    </article>
+    <article class="card">
+      <div class="pill">MY PERSON</div>
+      <h3 id="nameCard2" style="margin-top:14px">My Favorite Soul</h3>
+      <p class="small">The person I want beside me for the little things and the big things.</p>
+    </article>
+    <article class="card wide">
+      <div class="eyebrow">A PROMISE</div>
+      <p class="quote">"I cannot promise every day will be perfect. I can promise to keep choosing kindness, honesty, and us."</p>
+      <div class="small muted">A little reminder for our journey.</div>
+    </article>
+  </div>
+</section>
+
+<section id="counter" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">02 / OUR TIME</div>
+    <h2>Time with you.</h2>
+    <p>Set a special date to make this counter yours.</p>
+  </div>
+  <div class="card">
+    <label class="label" for="startDate">Our special date</label>
+    <input class="field" type="date" id="startDate">
+    <div class="stat-grid">
+      <div class="stat"><strong id="days">—</strong><span>DAYS</span></div>
+      <div class="stat"><strong id="hours">—</strong><span>HOURS</span></div>
+      <div class="stat"><strong id="minutes">—</strong><span>MINUTES</span></div>
+    </div>
+    <p class="small" id="dateMessage" style="margin-top:15px">Choose your date to start the counter.</p>
+    <div class="actions">
+      <button class="secondary" id="todayBtn">Use today</button>
+      <button class="secondary" id="clearDateBtn">Clear date</button>
+    </div>
+  </div>
+</section>
+
+<section id="love-letter" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">03 / WORDS FROM THE HEART</div>
+    <h2>A letter for you.</h2>
+    <p>Some things deserve to be said more than once.</p>
+  </div>
+  <div class="card">
+    <div class="letter" id="letterText">To my favorite person,
+
+If I could give you one thing, it would be the ability to see yourself through my eyes. You would understand why you matter so much to me.
+
+Thank you for the little moments, the unexpected smiles, and the memories that stay with me long after the day is over.
+
+Wherever life takes us, I hope we keep making room for honesty, laughter, patience, and kindness.
+
+You are a beautiful part of my story.
+
+Always, with love. ♡</div>
+    <div class="divider"></div>
+    <label class="label" for="letterInput">Write your own letter</label>
+    <textarea class="field" id="letterInput" placeholder="Write something meaningful..."></textarea>
+    <div class="actions">
+      <button class="primary" id="saveLetter">Save letter</button>
+      <button class="secondary" id="copyLetter">Copy letter</button>
+      <button class="secondary" id="resetLetter">Restore default</button>
+    </div>
+  </div>
+</section>
+
+<section id="reasons" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">04 / A HUNDRED LITTLE THINGS</div>
+    <h2>Reasons I adore you.</h2>
+    <p>Tap for another little reminder.</p>
+  </div>
+  <div class="card" style="text-align:center">
+    <div class="hero-heart" style="width:72px;height:72px;font-size:30px">♡</div>
+    <h3 id="reasonNumber" style="margin-top:20px">Reason 01</h3>
+    <p class="quote" id="reasonText">Your presence makes even quiet moments feel special.</p>
+    <div class="actions" style="justify-content:center">
+      <button class="primary" id="nextReason">Another reason →</button>
+      <button class="secondary" id="prevReason">← Previous</button>
+    </div>
+    <div class="progress" style="margin-top:22px"><span id="reasonProgress"></span></div>
+  </div>
+</section>
+
+<section id="compliments" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">05 / YOUR DAILY DOSE</div>
+    <h2>A reminder, just because.</h2>
+  </div>
+  <div class="card">
+    <p class="quote" id="complimentText">You deserve the kind of love that feels safe, honest, and peaceful.</p>
+    <button class="secondary" id="newCompliment">Give me a reminder ♡</button>
+    <button class="secondary" id="copyCompliment">Copy this message</button>
+  </div>
+</section>
+
+<section id="memories" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">06 / LITTLE TIME CAPSULE</div>
+    <h2>Our memory book.</h2>
+    <p>Add your favorite moments. They are saved in this browser when storage is available.</p>
+  </div>
+  <div class="card">
+    <label class="label" for="memoryTitle">Memory title</label>
+    <input class="field" id="memoryTitle" maxlength="70" placeholder="The day we first met">
+    <label class="label" for="memoryDate">Date (optional)</label>
+    <input class="field" id="memoryDate" type="date">
+    <label class="label" for="memoryDesc">What made it special?</label>
+    <textarea class="field" id="memoryDesc" maxlength="500" placeholder="Write a little about this memory..."></textarea>
+    <button class="primary" id="addMemory">Add to our memories +</button>
+    <div class="divider"></div>
+    <div id="memoryList" class="memory"></div>
+    <p class="small" id="memoryStatus">No memories added yet.</p>
+    <button class="secondary" id="exportMemories">Export memories</button>
+    <button class="danger" id="clearMemories">Clear all memories</button>
+  </div>
+</section>
+
+<section id="compatibility" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">07 / JUST FOR FUN</div>
+    <h2>Our connection quiz.</h2>
+    <p>This is a playful quiz, not a scientific compatibility test.</p>
+  </div>
+  <div class="card">
+    <div id="quizArea">
+      <h3 id="quizQuestion">What makes a relationship feel strongest?</h3>
+      <div id="quizOptions" class="actions"></div>
+      <p class="small" id="quizProgress">Question 1 of 5</p>
+    </div>
+    <div id="quizResult" hidden>
+      <div class="big-number gradient" id="quizScore">100%</div>
+      <h3>Your relationship vibe</h3>
+      <p id="quizSummary"></p>
+      <button class="primary" id="restartQuiz">Play again</button>
+    </div>
+  </div>
+</section>
+
+<section id="quotes" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">08 / THE LOVE WALL</div>
+    <h2>Little words. Big feelings.</h2>
+  </div>
+  <div class="card">
+    <div class="pill">QUOTE OF THE MOMENT</div>
+    <p class="quote" id="quoteText" style="margin-top:18px">"Love is not about perfection. It is about showing up with care."</p>
+    <div class="actions">
+      <button class="primary" id="nextQuote">Next quote</button>
+      <button class="secondary" id="copyQuote">Copy quote</button>
+    </div>
+  </div>
+</section>
+
+<section id="music" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">09 / OUR SOUNDTRACK</div>
+    <h2>A song for this moment.</h2>
+    <p>Add an audio file you have permission to use. Browsers require a tap to start audio.</p>
+  </div>
+  <div class="card">
+    <div class="row">
+      <div class="hero-heart" style="width:64px;height:64px;font-size:24px;flex-shrink:0">♫</div>
+      <div style="flex:1">
+        <h3 id="trackTitle">Our little soundtrack</h3>
+        <p class="small" id="musicStatus">Choose an audio file below.</p>
+      </div>
+    </div>
+    <label class="label" for="audioFile">Choose an audio file</label>
+    <input class="field" id="audioFile" type="file" accept="audio/*">
+    <audio id="audio" preload="none"></audio>
+    <div class="row">
+      <button class="primary" id="playMusic">▶ Play</button>
+      <button class="secondary" id="stopMusic">■ Stop</button>
+      <button class="secondary" id="muteMusic">Mute</button>
+    </div>
+    <label class="label" for="volume" style="margin-top:17px">Volume</label>
+    <input class="field" style="padding:0;border:0" id="volume" type="range" min="0" max="1" step=".05" value=".65">
+    <div class="row">
+      <span class="small" id="currentTime">0:00</span>
+      <input id="seek" type="range" min="0" max="100" value="0" aria-label="Seek audio" style="flex:1;min-width:70px">
+      <span class="small" id="duration">0:00</span>
+    </div>
+    <p class="small">Audio stays on your device. This page does not upload your selected song.</p>
+  </div>
+</section>
+
+<section id="surprise" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">10 / SOMETHING JUST FOR YOU</div>
+    <h2>Ready for a little surprise?</h2>
+  </div>
+  <div class="card" style="text-align:center">
+    <div class="hero-heart" style="margin-bottom:20px">♥</div>
+    <h3 id="surpriseTitle">There is something I want you to know.</h3>
+    <p id="surpriseText">You do not have to be perfect to be deeply loved.</p>
+    <button class="primary" id="revealSurprise">Reveal a surprise ♡</button>
+    <button class="secondary" id="heartBurst">Send a heart shower</button>
+    <button class="secondary" id="confettiBtn">Celebrate us</button>
+  </div>
+</section>
+
+<section id="customize" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">11 / MAKE IT OURS</div>
+    <h2>Your little universe.</h2>
+    <p>Change the names, message, colors, and special date.</p>
+  </div>
+  <div class="card">
+    <label class="label" for="partner1">First person's name</label>
+    <input class="field" id="partner1" maxlength="35" placeholder="First name">
+    <label class="label" for="partner2">Second person's name</label>
+    <input class="field" id="partner2" maxlength="35" placeholder="Second name">
+    <label class="label" for="subtitleInput">Main message</label>
+    <textarea class="field" id="subtitleInput" maxlength="240" placeholder="Your favorite message"></textarea>
+    <label class="label" for="themeColor">Accent theme</label>
+    <select class="field" id="themeColor">
+      <option value="pink">Rose pink + violet</option>
+      <option value="red">Ruby red + rose</option>
+      <option value="blue">Midnight blue + ice</option>
+      <option value="gold">Champagne gold + rose</option>
+    </select>
+    <div class="actions">
+      <button class="primary" id="applySettings">Save changes</button>
+      <button class="secondary" id="resetSettings">Reset names and theme</button>
+      <button class="secondary" id="exportSettings">Export settings</button>
+    </div>
+    <p class="small">Settings are stored loca
